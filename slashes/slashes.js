@@ -10,6 +10,7 @@ module.exports = (globalVariables) => {
   }
 
   client.ws.on('INTERACTION_CREATE', async interaction => {
+    if(interaction.type != 2) return;
     let slash = await new SlashAPI().init(interaction);
     let commands = getFiles(__dirname+"/commands").filter(f => f.endsWith(".js"));
     for(let i=0; i<commands.length; i++){
